@@ -8,7 +8,7 @@
 
 import Foundation
 
-let FlickrAPIKey = "自己去申請"
+let FlickrAPIKey = "1ca4f673ccb9c5a2069593d7982e41c6"
 
 // key paths to photos or places at top-level of Flickr results
 let FLICKR_RESULTS_PHOTOS = "photos.photo"

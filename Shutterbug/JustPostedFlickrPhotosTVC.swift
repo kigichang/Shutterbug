@@ -27,7 +27,9 @@ class JustPostedFlickrPhotosTVC: FlickrPhotosTVC {
         // use non-blocking call
         let queue = dispatch_queue_create("flickr fetcher", nil)
         // xcode6 不用 將 Refresh Control 綁定 Action。直接 beginRefreshing and endRefreshing
-        self.refreshControl.beginRefreshing()
+        if self.refreshControl != nil {
+            self.refreshControl.beginRefreshing()
+        }
         dispatch_async(queue, {
             let url = FlickrFetcher.URLforRecentGeoreferencedPhotos()
             let jsonResults = NSData(contentsOfURL: url)
@@ -36,7 +38,9 @@ class JustPostedFlickrPhotosTVC: FlickrPhotosTVC {
             let photos = propertyListResults?.valueForKeyPath(FLICKR_RESULTS_PHOTOS) as? NSArray
             
             dispatch_async(dispatch_get_main_queue(), {
-                self.refreshControl.endRefreshing()
+                if self.refreshControl != nil {
+                    self.refreshControl.endRefreshing()
+                }
                 self.photos = photos
             })
         })

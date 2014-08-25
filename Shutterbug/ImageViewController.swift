@@ -40,7 +40,9 @@ class ImageViewController: UIViewController, UIScrollViewDelegate, UISplitViewCo
         }
         
         set {
-            self.scrollView.zoomScale = CGFloat(1.0)
+            if self.scrollView != nil {
+                self.scrollView.zoomScale = CGFloat(1.0)
+            }
             self.imageView.image = newValue
             if newValue != nil {
                 self.imageView.frame = CGRectMake(CGFloat(0.0), CGFloat(0.0), newValue.size.width, newValue.size.height)
@@ -105,7 +107,9 @@ class ImageViewController: UIViewController, UIScrollViewDelegate, UISplitViewCo
     
 // MARK: Spilter Delegate
     override func awakeFromNib() {
-        self.splitViewController.delegate = self
+        if self.splitViewController != nil {
+            self.splitViewController.delegate = self
+        }
     }
     
     //func splitViewController(svc: UISplitViewController!, shouldHideViewController vc: UIViewController!, inOrientation orientation: UIInterfaceOrientation) -> Bool {

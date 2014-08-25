@@ -97,7 +97,10 @@ class FlickrPhotosTVC: UITableViewController {
             self.prepareImageViewController(detail, toDisplayPhoto: self.photos[indexPath.row] as? NSDictionary)
         }
         */
-        
+        println("didSelecRowAtIndexPath")
+        if self.splitViewController == nil {
+            return
+        }
         /* 因為在 SpliterViewController 的 Detail 改接 NavigationController，所以要改判斷 */
         if let detail = self.splitViewController.viewControllers[1] as? UINavigationController {
             if let view = detail.viewControllers.first as? ImageViewController {
@@ -112,7 +115,7 @@ class FlickrPhotosTVC: UITableViewController {
     override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
         // Get the new view controller using [segue destinationViewController].
         // Pass the selected object to the new view controller.
-        
+        println("prepareForSegue")
         if let cell = sender as? UITableViewCell {
             if let indexPath = self.tableView.indexPathForCell(cell) {
                 if segue.identifier == "Display Photo" {
