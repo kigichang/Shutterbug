@@ -32,25 +32,25 @@ class FlickrPhotosTVC: UITableViewController {
     }
 
     // MARK: - Table view data source
-
-    override func numberOfSectionsInTableView(tableView: UITableView!) -> Int {
+    
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // Return the number of sections.
         return 1
     }
 
-    override func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // Return the number of rows in the section.
         return self.photos != nil ? self.photos.count : 0
     }
 
     
-    override func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Flickr Photo Cell", forIndexPath: indexPath) as UITableViewCell
 
         // Configure the cell...
         if let photo = self.photos[indexPath.row] as? NSDictionary {
-            cell.textLabel.text = photo.valueForKeyPath(FLICKR_PHOTO_TITLE) as? String
-            cell.detailTextLabel.text = photo.valueForKeyPath(FLICKR_PHOTO_DESCRIPTION) as? String
+            cell.textLabel?.text = photo.valueForKeyPath(FLICKR_PHOTO_TITLE) as? String
+            cell.detailTextLabel?.text = photo.valueForKeyPath(FLICKR_PHOTO_DESCRIPTION) as? String
         }
         return cell
     }
@@ -91,7 +91,7 @@ class FlickrPhotosTVC: UITableViewController {
     }
     */
 
-    override func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         /*
         if let detail = self.splitViewController.viewControllers[1] as? ImageViewController {
             self.prepareImageViewController(detail, toDisplayPhoto: self.photos[indexPath.row] as? NSDictionary)
@@ -102,17 +102,19 @@ class FlickrPhotosTVC: UITableViewController {
             return
         }
         /* 因為在 SpliterViewController 的 Detail 改接 NavigationController，所以要改判斷 */
-        if let detail = self.splitViewController.viewControllers[1] as? UINavigationController {
+        if let detail = self.splitViewController!.viewControllers[1] as? UINavigationController {
             if let view = detail.viewControllers.first as? ImageViewController {
                 self.prepareImageViewController(view, toDisplayPhoto: self.photos[indexPath.row] as? NSDictionary)
             }
         }
+        
+
     }
     
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         // Get the new view controller using [segue destinationViewController].
         // Pass the selected object to the new view controller.
         println("prepareForSegue")

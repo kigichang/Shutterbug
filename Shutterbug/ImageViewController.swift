@@ -13,7 +13,7 @@ class ImageViewController: UIViewController, UIScrollViewDelegate, UISplitViewCo
 // MARK: Properties
     @IBOutlet var scrollView: UIScrollView! {
         didSet {
-            self.scrollView.contentSize = self.imageView.image != nil ? self.imageView.image.size : CGSizeZero
+            self.scrollView.contentSize = self.imageView.image != nil ? self.imageView.image!.size : CGSizeZero
             
             self.scrollView.minimumZoomScale = CGFloat(0.2)
             self.scrollView.maximumZoomScale = CGFloat(2.0)
@@ -54,7 +54,7 @@ class ImageViewController: UIViewController, UIScrollViewDelegate, UISplitViewCo
             }
             
             if self.scrollView != nil && self.imageView.image != nil {
-                self.scrollView.contentSize = self.imageView.image.size
+                self.scrollView.contentSize = self.imageView.image!.size
             }
             else if self.scrollView != nil {
                 self.scrollView.contentSize = CGSizeZero
@@ -107,9 +107,11 @@ class ImageViewController: UIViewController, UIScrollViewDelegate, UISplitViewCo
     
 // MARK: Spilter Delegate
     override func awakeFromNib() {
-        if self.splitViewController != nil {
-            self.splitViewController.delegate = self
-        }
+        //if self.splitViewController != nil {
+        //    self.splitViewController.delegate = self
+        //}
+        
+        self.splitViewController?.delegate = self
     }
     
     //func splitViewController(svc: UISplitViewController!, shouldHideViewController vc: UIViewController!, inOrientation orientation: UIInterfaceOrientation) -> Bool {

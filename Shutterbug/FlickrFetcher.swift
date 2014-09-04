@@ -105,23 +105,37 @@ class FlickrFetcher {
         return FlickrFetcher.URLForQuery("https://api.flickr.com/services/rest/?method=flickr.places.getInfo&place_id=\(flickrPlaceId)")
     }
     
-    class func extractNameOfPlace(placeId: AnyObject, fromPlaceInformation place: NSDictionary) -> String! {
+    class func extractNameOfPlace(placeId: AnyObject, fromPlaceInformation place: NSDictionary) -> String? {
+
         
-        if placeId.isEqualToString(place.valueForKeyPath(FLICKR_PLACE_NEIGHBORHOOD_PLACE_ID) as? String) {
-            return place.valueForKeyPath(FLICKR_PLACE_NEIGHBORHOOD_NAME) as? String
+        if let str = place.valueForKeyPath(FLICKR_PLACE_NEIGHBORHOOD_PLACE_ID) as? String {
+            if placeId.isEqualToString(str) {
+              return str
+            }
         }
-        else if placeId.isEqualToString(place.valueForKeyPath(FLICKR_PLACE_LOCALITY_PLACE_ID) as? String) {
-            return place.valueForKeyPath("FLICKR_PLACE_LOCALITY_NAME") as? String
-        }
-        else if placeId.isEqualToString(place.valueForKeyPath(FLICKR_PLACE_COUNTY_PLACE_ID) as? String) {
-            return place.valueForKeyPath(FLICKR_PLACE_COUNTY_NAME) as? String
-        }
-        else if placeId.isEqualToString(place.valueForKeyPath(FLICKR_PLACE_REGION_PLACE_ID) as? String) {
-            return place.valueForKeyPath("FLICKR_PLACE_REGION_NAME") as? String
-        }
-        else if placeId.isEqualToString(place.valueForKeyPath(FLICKR_PLACE_COUNTRY_PLACE_ID) as? String) {
-            return place.valueForKeyPath(FLICKR_PLACE_COUNTRY_NAME) as? String
+        else if let str = place.valueForKeyPath(FLICKR_PLACE_LOCALITY_PLACE_ID) as? String {
             
+            if placeId.isEqualToString(str) {
+                return str
+            }
+        }
+        else if let str = place.valueForKeyPath(FLICKR_PLACE_COUNTY_PLACE_ID) as? String {
+            
+            if placeId.isEqualToString(str) {
+                return str
+            }
+        }
+        else if let str = place.valueForKeyPath(FLICKR_PLACE_REGION_PLACE_ID) as? String {
+            
+            if placeId.isEqualToString(str) {
+                return str
+            }
+        }
+        else if let str = place.valueForKeyPath(FLICKR_PLACE_COUNTRY_PLACE_ID) as? String {
+            
+            if placeId.isEqualToString(str) {
+                return str
+            }
         }
 
         return nil
